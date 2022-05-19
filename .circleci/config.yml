@@ -6,6 +6,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout
+      - run: npm i
       - run: 
           name: build
           command: npm run lint
@@ -15,6 +16,7 @@ jobs:
       - image: circleci/node:13.8.0
     steps:
       - checkout  
+      - run: npm i
       - run: 
           name: test
           command: npm run test      
@@ -32,9 +34,9 @@ workflows:
   first-workflow:
     jobs:
       - build
-      - test
+      - test:
          requires :
           - build
-      - analyse
+      - analyse:
           requires :
            - test      
